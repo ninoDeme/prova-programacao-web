@@ -1,10 +1,10 @@
 import express from "express";
-import pkg from "./package.json" with { type: 'json' };
+import { getUsuario } from "./usuario.js";
 const app = express();
 const port = process.env.PORT ?? 3000;
 
-app.get("/version", (req, res) => {
-  res.send(pkg.version);
+app.get("/usuarios", (req, res) => {
+  res.json(new Array(100).fill(null).map((_, i) => getUsuario(i)));
 });
 
 app.listen(port, () => {
