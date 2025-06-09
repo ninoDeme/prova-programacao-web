@@ -3,6 +3,8 @@ import { getUsuario } from "./usuario.js";
 const app = express();
 const port = process.env.PORT ?? 3000;
 
+app.use("/", express.static('public'));
+
 app.get("/api/usuarios", (req, res) => {
   res.json(
     new Array(100)
