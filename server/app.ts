@@ -1,9 +1,8 @@
 import express from "express";
 import { getUsuario } from "./usuario.js";
+import path from "node:path";
 const app = express();
 const port = process.env.PORT ?? 3000;
-
-app.use("/", express.static('public'));
 
 app.get("/api/usuarios", (req, res) => {
   res.json(
@@ -26,6 +25,12 @@ app.get("/api/dados/:id", (req, res) => {
     res.json(getUsuario(id));
   }
 });
+
+app.use("/", express.static("public"));
+app.get(/(.*)/, (req, res) => {
+  res.sendFile(path.resolve("public", "index.html"));
+});
+
 
 app.listen(port, () => {
   console.log(`Aplicativo ouvindo http://localhost:${port}`);
